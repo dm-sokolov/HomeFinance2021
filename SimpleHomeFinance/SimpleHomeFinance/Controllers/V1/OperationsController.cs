@@ -1,41 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SimpleHomeFinance.Contracts;
 using SimpleHomeFinance.Contracts.V1;
 using SimpleHomeFinance.Contracts.V1.Requests;
 using SimpleHomeFinance.Contracts.V1.Response;
 using SimpleHomeFinance.Domain;
+using SimpleHomeFinance.Services;
 
 namespace SimpleHomeFinance.Controllers.V1
 {
     public class OperationsController : Controller
     {
-        private List<Operation> _operations;
+        private readonly IOperationService _operationService;
 
-        public OperationsController()
+
+        public OperationsController(IOperationService operationService)
         {
-            _operations = new List<Operation>();
-            for (int i = 0; i < 5; i++)
-            {
-                _operations.Add(new Operation
-                {
-                    Id = Guid.NewGuid().ToString()
-                });
-            }
+            _operationService = operationService;
         }
 
         [HttpGet(ApiRoutes.Operations.GetAll)]
         public IActionResult GetAll()
         {
-            return Ok(_operations);
+            return Ok(_operationService.GetOperations());
         }
 
 
         [HttpGet(ApiRoutes.Operations.Get)]
-        public IActionResult Get(string operationId)
+        public IActionResult Get([FromRoute] Guid operationId)
         {
-            return Ok();
+            var operation = _operationService.GetOperationById(operationId);
+
+            if (operation == null)
+                return NotFound();
+
+            return Ok(operation);
         }
 
 
@@ -47,13 +48,13 @@ namespace SimpleHomeFinance.Controllers.V1
                 Id = operationRequest.Id
             };
 
-            if (string.IsNullOrEmpty(operation.Id))
-                operation.Id = Guid.NewGuid().ToString();
+            if (operation.Id != Guid.Empty)
+                operation.Id = Guid.NewGuid();
 
-            _operations.Add(operation);
+            _operationService.GetOperations().Add(operation);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUri = baseUrl + "/" + ApiRoutes.Operations.Get.Replace("{operationId}", operation.Id);
+            var locationUri = baseUrl + "/" + ApiRoutes.Operations.Get.Replace("{operationId}", operation.Id.ToString());
 
             var response = new OperationResponse
             {

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleHomeFinance.Data;
+using SimpleHomeFinance.Services;
 
 namespace SimpleHomeFinance.Installers
 {
@@ -15,6 +16,8 @@ namespace SimpleHomeFinance.Installers
                     configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DataContext>();
+
+            services.AddSingleton<IOperationService, OperationService>();
         }
     }
 }
