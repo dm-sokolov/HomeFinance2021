@@ -14,6 +14,8 @@
             
             public const string Get = Base + "/operations/{operationId}";
             
+            public const string Update = Base + "/operations/{operationId}";
+            
             public const string Create = Base + "/operations";
         }
     }

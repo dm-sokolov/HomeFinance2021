@@ -39,6 +39,23 @@ namespace SimpleHomeFinance.Controllers.V1
             return Ok(operation);
         }
 
+        [HttpPut(ApiRoutes.Operations.Update)]
+        public IActionResult Update([FromRoute] Guid operationId, [FromBody] UpdateOperationRequest request)
+        {
+            var operation = new Operation
+            {
+                 Id = operationId,
+                 Name = request.Name
+            };
+
+            var updated = _operationService.UpdateOperation(operation);
+
+            if (updated)
+                return Ok(operation);
+
+            return NotFound();
+        }
+
 
         [HttpPost(ApiRoutes.Operations.Create)]
         public IActionResult Create([FromBody] CreateOperationRequest operationRequest)

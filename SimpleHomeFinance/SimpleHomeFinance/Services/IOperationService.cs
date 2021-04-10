@@ -11,5 +11,6 @@ namespace SimpleHomeFinance.Services
 
         Operation GetOperationById(Guid operationId);
 
+        bool UpdateOperation(Operation operationToUpdate);
     }
 }
