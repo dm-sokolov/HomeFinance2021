@@ -43,5 +43,17 @@ namespace SimpleHomeFinance.Services
 
             return true;
         }
+
+        public bool DeleteOperation(Guid operationId)
+        {
+            var operation = GetOperationById(operationId);
+
+            if (operation == null)
+                return false;
+
+            _operations.Remove(operation);
+
+            return true;
+        }
     }
 }

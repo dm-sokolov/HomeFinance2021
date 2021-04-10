@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SimpleHomeFinance.Contracts;
 using SimpleHomeFinance.Contracts.V1;
 using SimpleHomeFinance.Contracts.V1.Requests;
@@ -52,6 +53,17 @@ namespace SimpleHomeFinance.Controllers.V1
 
             if (updated)
                 return Ok(operation);
+
+            return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.Operations.Delete)]
+        public IActionResult Delete([FromRoute] Guid operationId)
+        {
+            var deleted = _operationService.DeleteOperation(operationId);
+
+            if (deleted)
+                return NoContent();
 
             return NotFound();
         }
