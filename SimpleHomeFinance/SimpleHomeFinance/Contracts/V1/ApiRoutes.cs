@@ -11,6 +11,10 @@
         public static class Operations
         {
             public const string GetAll = Base + "/operations";
+            
+            public const string Get = Base + "/operations/{operationId}";
+            
+            public const string Create = Base + "/operations";
         }
     }
 }

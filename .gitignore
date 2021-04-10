@@ -366,3 +366,4 @@ FodyWeavers.xsd
 
 *.csprojAssemblyReference.cache
 *.csproj.CoreCompileInputs.cache
+*.dtbcache.v2
