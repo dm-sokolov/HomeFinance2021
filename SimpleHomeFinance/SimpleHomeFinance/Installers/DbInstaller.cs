@@ -17,7 +17,7 @@ namespace SimpleHomeFinance.Installers
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<DataContext>();
 
-            services.AddSingleton<IOperationService, OperationService>();
+            services.AddScoped<IOperationService, OperationService>();
         }
     }
 }

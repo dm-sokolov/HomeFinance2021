@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SimpleHomeFinance.Domain;
 
 namespace SimpleHomeFinance.Data
 {
@@ -12,5 +13,7 @@ namespace SimpleHomeFinance.Data
             : base(options)
         {
         }
+
+        public DbSet<Operation> Operations { get; set; }
     }
 }

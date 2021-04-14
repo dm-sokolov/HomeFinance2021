@@ -4,6 +4,6 @@ namespace SimpleHomeFinance.Contracts.V1.Requests
 {
     public class CreateOperationRequest
     {
-        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }

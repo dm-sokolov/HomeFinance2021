@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SimpleHomeFinance.Contracts.V1;
 using SimpleHomeFinance.Domain;
 
@@ -7,12 +8,14 @@ namespace SimpleHomeFinance.Services
 {
     public interface IOperationService
     {
-        List<Operation> GetOperations();
+        Task<List<Operation>> GetOperationsAsync();
 
-        Operation GetOperationById(Guid operationId);
+        Task<Operation> GetOperationByIdAsync(Guid operationId);
 
-        bool UpdateOperation(Operation operationToUpdate);
+        Task<bool> CreateOperationAsync(Operation operation);
         
-        bool DeleteOperation(Guid operationId);
+        Task<bool> UpdateOperationAsync(Operation operationToUpdate);
+        
+        Task<bool> DeleteOperationAsync(Guid operationId);
     }
 }

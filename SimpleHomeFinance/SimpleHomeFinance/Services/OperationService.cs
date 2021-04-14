@@ -1,59 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SimpleHomeFinance.Data;
 using SimpleHomeFinance.Domain;
 
 namespace SimpleHomeFinance.Services
 {
     public class OperationService : IOperationService
     {
-        private readonly List<Operation> _operations;
+        private readonly DataContext _dataContext;
 
-        public OperationService()
+        public OperationService(DataContext dataContext)
         {
-            _operations = new List<Operation>();
-            for (int i = 0; i < 5; i++)
-            {
-                _operations.Add(new Operation
-                {
-                    Id = Guid.NewGuid(),
-                    Name = $"Operation Name {i}"
-                });
-            }
-        }
-        public List<Operation> GetOperations()
-        {
-            return _operations;
+            _dataContext = dataContext;
         }
 
-        public Operation GetOperationById(Guid operationId)
+        public async Task<List<Operation>> GetOperationsAsync()
         {
-            return _operations.SingleOrDefault(x => x.Id == operationId);
+            return await _dataContext.Operations.ToListAsync();
         }
 
-        public bool UpdateOperation(Operation operationToUpdate)
+        public async Task<Operation> GetOperationByIdAsync(Guid operationId)
         {
-            var exists = GetOperationById(operationToUpdate.Id) != null;
-
-            if (!exists)
-                return false;
-
-            var index = _operations.FindIndex(x => x.Id == operationToUpdate.Id);
-            _operations[index] = operationToUpdate;
-
-            return true;
+            return await _dataContext.Operations.SingleOrDefaultAsync(x => x.Id == operationId);
         }
 
-        public bool DeleteOperation(Guid operationId)
+        public async Task<bool> UpdateOperationAsync(Operation operationToUpdate)
         {
-            var operation = GetOperationById(operationId);
+            _dataContext.Operations.Update(operationToUpdate);
+            var updated = await _dataContext.SaveChangesAsync();
+
+            return updated > 0;
+        }
+
+        public async Task<bool> DeleteOperationAsync(Guid operationId)
+        {
+            var operation = await GetOperationByIdAsync(operationId);
 
             if (operation == null)
                 return false;
+            
+            _dataContext.Operations.Remove(operation);
+            var deleted = await _dataContext.SaveChangesAsync();
+            
+            return deleted > 0;
+        }
 
-            _operations.Remove(operation);
+        public async Task<bool> CreateOperationAsync(Operation operation)
+        {
+            _dataContext.Operations.AddAsync(operation);
+            var created = await _dataContext.SaveChangesAsync();
 
-            return true;
+            return created > 0;
         }
     }
 }

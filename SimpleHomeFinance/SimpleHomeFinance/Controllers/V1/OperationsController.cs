@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using SimpleHomeFinance.Contracts;
@@ -23,16 +24,16 @@ namespace SimpleHomeFinance.Controllers.V1
         }
 
         [HttpGet(ApiRoutes.Operations.GetAll)]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(_operationService.GetOperations());
+            return Ok(await _operationService.GetOperationsAsync());
         }
 
 
         [HttpGet(ApiRoutes.Operations.Get)]
-        public IActionResult Get([FromRoute] Guid operationId)
+        public async Task<IActionResult> GetAsync([FromRoute] Guid operationId)
         {
-            var operation = _operationService.GetOperationById(operationId);
+            var operation = await _operationService.GetOperationByIdAsync(operationId);
 
             if (operation == null)
                 return NotFound();
@@ -41,7 +42,7 @@ namespace SimpleHomeFinance.Controllers.V1
         }
 
         [HttpPut(ApiRoutes.Operations.Update)]
-        public IActionResult Update([FromRoute] Guid operationId, [FromBody] UpdateOperationRequest request)
+        public async Task<IActionResult> UpdateAsync([FromRoute] Guid operationId, [FromBody] UpdateOperationRequest request)
         {
             var operation = new Operation
             {
@@ -49,7 +50,7 @@ namespace SimpleHomeFinance.Controllers.V1
                  Name = request.Name
             };
 
-            var updated = _operationService.UpdateOperation(operation);
+            var updated = await _operationService.UpdateOperationAsync(operation);
 
             if (updated)
                 return Ok(operation);
@@ -58,9 +59,9 @@ namespace SimpleHomeFinance.Controllers.V1
         }
 
         [HttpDelete(ApiRoutes.Operations.Delete)]
-        public IActionResult Delete([FromRoute] Guid operationId)
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid operationId)
         {
-            var deleted = _operationService.DeleteOperation(operationId);
+            var deleted = await _operationService.DeleteOperationAsync(operationId);
 
             if (deleted)
                 return NoContent();
@@ -70,17 +71,14 @@ namespace SimpleHomeFinance.Controllers.V1
 
 
         [HttpPost(ApiRoutes.Operations.Create)]
-        public IActionResult Create([FromBody] CreateOperationRequest operationRequest)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateOperationRequest operationRequest)
         {
             var operation = new Operation
             {
-                Id = operationRequest.Id
+                Name = operationRequest.Name
             };
 
-            if (operation.Id != Guid.Empty)
-                operation.Id = Guid.NewGuid();
-
-            _operationService.GetOperations().Add(operation);
+            await _operationService.CreateOperationAsync(operation);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUri = baseUrl + "/" + ApiRoutes.Operations.Get.Replace("{operationId}", operation.Id.ToString());
