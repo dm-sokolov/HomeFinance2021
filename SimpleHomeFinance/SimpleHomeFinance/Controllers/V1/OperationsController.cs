@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using SimpleHomeFinance.Contracts;
 using SimpleHomeFinance.Contracts.V1;
 using SimpleHomeFinance.Contracts.V1.Requests;
 using SimpleHomeFinance.Contracts.V1.Response;

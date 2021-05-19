@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj": {}
+    "H:\\Disc_c\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj": {}
   },
   "projects": {
-    "C:\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj": {
+    "H:\\Disc_c\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj",
+        "projectUniqueName": "H:\\Disc_c\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj",
         "projectName": "SimpleHomeFinance",
-        "projectPath": "C:\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj",
+        "projectPath": "H:\\Disc_c\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\SimpleHomeFinance.csproj",
         "packagesPath": "C:\\Users\\Falcon\\.nuget\\packages\\",
-        "outputPath": "C:\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\obj\\",
+        "outputPath": "H:\\Disc_c\\HomeFinance2021\\SimpleHomeFinance\\SimpleHomeFinance\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\Falcon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,7 +33,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -43,7 +44,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
@@ -88,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

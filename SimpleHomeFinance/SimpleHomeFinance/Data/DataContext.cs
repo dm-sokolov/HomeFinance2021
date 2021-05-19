@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using SimpleHomeFinance.Domain;
 
 namespace SimpleHomeFinance.Data
@@ -12,6 +9,7 @@ namespace SimpleHomeFinance.Data
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Operation> Operations { get; set; }
