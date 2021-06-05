@@ -10,12 +10,12 @@ namespace SimpleHomeFinance.Services
     {
         Task<List<Operation>> GetOperationsAsync();
 
-        Task<Operation> GetOperationByIdAsync(Guid operationId);
+        Task<Operation> GetOperationByIdAsync(int operationId);
 
         Task<bool> CreateOperationAsync(Operation operation);
         
         Task<bool> UpdateOperationAsync(Operation operationToUpdate);
         
-        Task<bool> DeleteOperationAsync(Guid operationId);
+        Task<bool> DeleteOperationAsync(int operationId);
     }
 }

@@ -22,7 +22,7 @@ namespace SimpleHomeFinance.Services
             return await _dataContext.Operations.ToListAsync();
         }
 
-        public async Task<Operation> GetOperationByIdAsync(Guid operationId)
+        public async Task<Operation> GetOperationByIdAsync(int operationId)
         {
             return await _dataContext.Operations.SingleOrDefaultAsync(x => x.Id == operationId);
         }
@@ -35,7 +35,7 @@ namespace SimpleHomeFinance.Services
             return updated > 0;
         }
 
-        public async Task<bool> DeleteOperationAsync(Guid operationId)
+        public async Task<bool> DeleteOperationAsync(int operationId)
         {
             var operation = await GetOperationByIdAsync(operationId);
 

@@ -27,7 +27,7 @@ namespace SimpleHomeFinance.Controllers.V1
 
 
         [HttpGet(ApiRoutes.Operations.Get)]
-        public async Task<IActionResult> GetAsync([FromRoute] Guid operationId)
+        public async Task<IActionResult> GetAsync([FromRoute] int operationId)
         {
             var operation = await _operationService.GetOperationByIdAsync(operationId);
 
@@ -38,7 +38,7 @@ namespace SimpleHomeFinance.Controllers.V1
         }
 
         [HttpPut(ApiRoutes.Operations.Update)]
-        public async Task<IActionResult> UpdateAsync([FromRoute] Guid operationId, [FromBody] UpdateOperationRequest request)
+        public async Task<IActionResult> UpdateAsync([FromRoute] int operationId, [FromBody] UpdateOperationRequest request)
         {
             var operation = new Operation
             {
@@ -55,7 +55,7 @@ namespace SimpleHomeFinance.Controllers.V1
         }
 
         [HttpDelete(ApiRoutes.Operations.Delete)]
-        public async Task<IActionResult> DeleteAsync([FromRoute] Guid operationId)
+        public async Task<IActionResult> DeleteAsync([FromRoute] int operationId)
         {
             var deleted = await _operationService.DeleteOperationAsync(operationId);
 
